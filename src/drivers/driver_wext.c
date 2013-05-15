@@ -2470,7 +2470,6 @@ static int wext_stop_sched_scan(void *priv)
 	return android_wext_cmd(drv, "PNOFORCE 0");
 }
 
-#ifdef ANDROID
 /**
  * wpa_driver_wext_set_scan_timeout - Set scan timeout to report scan completion
  * @priv:  Pointer to private wext data from wpa_driver_wext_init()
@@ -2829,8 +2828,6 @@ int wpa_driver_signal_poll(void *priv, struct wpa_signal_info *si)
 
 	return 0;
 }
-#endif
-
 
 #endif /* ANDROID */
 
@@ -2858,5 +2855,6 @@ const struct wpa_driver_ops wpa_driver_wext_ops = {
 #ifdef ANDROID
 	.sched_scan = wext_sched_scan,
 	.stop_sched_scan = wext_stop_sched_scan,
+        .signal_poll = wpa_driver_signal_poll,
 #endif /* ANDROID */
 };
